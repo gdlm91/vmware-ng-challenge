@@ -1,1 +1,19 @@
-<h1>Your Solution Here</h1>
+<h1>FaaS Status</h1>
+
+<table class="table">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Description</th>
+         <th>State</th>
+         <th>Memory Allocation</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let id of faasIds"
+          faas-status
+          [id]='id'>
+      </tr>
+   </tbody>
+</table>
