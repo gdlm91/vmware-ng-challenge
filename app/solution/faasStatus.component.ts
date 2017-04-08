@@ -5,7 +5,8 @@ import { IFaasStatus } from '../api/FaasStatus'
 @Component({
    moduleId: __moduleName,
    selector: '[faas-status]',
-   templateUrl: 'faasStatus.component.html'
+   templateUrl: 'faasStatus.component.html',
+   styleUrls: ['faasStatus.component.css']
 })
 
 export class FaasStatusComponent implements OnInit {
