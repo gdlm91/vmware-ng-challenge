@@ -1,1 +1,18 @@
-<h1>Your Solution Here</h1>
+<h1>FaaS Monthly Costs to date</h1>
+
+<table class="table">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Description</th>
+         <th>Cost</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let id of faasIds"
+          faas-cost
+          [id]='id'>
+      </tr>
+   </tbody>
+</table>
