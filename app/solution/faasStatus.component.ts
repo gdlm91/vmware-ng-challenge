@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FassPlatformStatusService } from '../api/faasPlatform.service';
-import { IFaasStatus } from '../api/FaasStatus'
+import { FassStatusService } from './faasStatus.service';
+import { IFaasStatus } from './FaasStatus'
 
 @Component({
    moduleId: __moduleName,
@@ -17,10 +17,10 @@ export class FaasStatusComponent implements OnInit {
    faasStatus: IFaasStatus;
 
    constructor(
-      private faasPlatformStatusService: FassPlatformStatusService
+      private faasStatusService: FassStatusService
    ) { }
 
    ngOnInit() {
-      this.faasPlatformStatusService.getFaasStatus(this.id).subscribe(faasStatus => this.faasStatus = faasStatus);
+      this.faasStatusService.getFaasStatus(this.id).subscribe(faasStatus => this.faasStatus = faasStatus);
    }
 }
