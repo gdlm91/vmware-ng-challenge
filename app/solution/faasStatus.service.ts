@@ -12,26 +12,30 @@ export class FassStatusService extends FaasPlatformService {
    }
 
    getFaasStatus(id: string): Observable<IFaasStatus> {
-      return this.getFaasInfo$(id).concatMapTo(this.getFaasUsage$(id), (faasInfo, faasUsage) => {
-         let totalMemoryAllocation = faasUsage.instances * faasInfo.memoryAllocation;
-
-         let status: IFaasStatus = {
-            faasInfo,
-            faasUsage,
-            totalMemoryAllocation,
-            memoryAllocationThreshold: getMemoryAllocationThreshold(totalMemoryAllocation)
-         }
-
-         return status;
-      });
+      return this.getFaasInfo$(id)
+         .concatMapTo(this.getFaasUsage$(id), (faasInfo, faasUsage) => this.getStatusInfo(faasInfo, faasUsage));
    }
 
-}
+   private getStatusInfo(faasInfo, faasUsage): IFaasStatus {
+      let totalMemoryAllocation = faasUsage.instances * faasInfo.memoryAllocation;
+      let memoryAllocationThreshold = this.getMemoryAllocationThreshold(totalMemoryAllocation);
 
-function getMemoryAllocationThreshold(totalMemoryAllocation: number): string {
-   if (totalMemoryAllocation > 20000000) return '>20';
+      let status: IFaasStatus = {
+         faasInfo,
+         faasUsage,
+         totalMemoryAllocation,
+         memoryAllocationThreshold
+      }
 
-   if (totalMemoryAllocation > 10000000) return '>10';
+      return status;
+   }
 
-   return '<10';
+   private getMemoryAllocationThreshold(totalMemoryAllocation: number): string {
+      if (totalMemoryAllocation > 20000000) return '>20';
+
+      if (totalMemoryAllocation > 10000000) return '>10';
+
+      return '<10';
+   }
+
 }

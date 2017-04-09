@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { FassStatusService } from './faasStatus.service';
+import { IFaasStatus } from './FaasStatus';
 
 @Component({
    moduleId: __moduleName,
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SolutionComponent implements OnInit {
 
-   faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   private faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
-   constructor() { }
+   faasStatusList: Observable<IFaasStatus>[] = [];
 
-   ngOnInit() { }
+   constructor(
+      private faasStatusService: FassStatusService
+   ) { }
+
+   ngOnInit() {
+      this.faasIds.forEach(id => this.faasStatusList.push(this.faasStatusService.getFaasStatus(id)));
+   }
 }

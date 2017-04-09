@@ -11,9 +11,9 @@
       </tr>
    </thead>
    <tbody>
-      <tr *ngFor="let id of faasIds"
+      <tr *ngFor="let faasStatus$ of faasStatusList"
           faas-status
-          [id]='id'>
+          [status]='faasStatus$ | async'>
       </tr>
    </tbody>
 </table>

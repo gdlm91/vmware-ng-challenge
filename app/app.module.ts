@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { SolutionModule } from './solution/solution.module';
 import { FaasPlatformService } from './api/faasPlatform.service';
 import { SharedModule } from './shared/shared.module';
-import { FassStatusService } from './solution/faasStatus.service';
 
 @NgModule({
    imports: [
@@ -15,7 +14,7 @@ import { FassStatusService } from './solution/faasStatus.service';
       SolutionModule
    ],
    declarations: [AppComponent],
-   providers: [FaasPlatformService, FassStatusService],
+   providers: [FaasPlatformService],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

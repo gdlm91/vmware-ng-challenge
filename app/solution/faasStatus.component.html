@@ -1,6 +1,8 @@
-<td>{{faasStatus?.faasInfo.id}}</td>
-<td>{{faasStatus?.faasInfo.name}}</td>
-<td>{{faasStatus?.faasInfo.description}}</td>
-<td>{{faasStatus?.faasUsage.state}}</td>
-<td [class.yellow]="faasStatus?.memoryAllocationThreshold == '>10'"
-    [class.red]="faasStatus?.memoryAllocationThreshold == '>20'">{{faasStatus?.totalMemoryAllocation | vmwMemoryFormat}}</td>
+<td>{{status.faasInfo.id}}</td>
+<td>{{status.faasInfo.name}}</td>
+<td>{{status.faasInfo.description}}</td>
+<td>{{status.faasUsage.state}}</td>
+<td [class.yellow]="status.memoryAllocationThreshold == '>10'"
+    [class.red]="status.memoryAllocationThreshold == '>20'">
+   {{status.totalMemoryAllocation | vmwMemoryFormat}}
+</td>

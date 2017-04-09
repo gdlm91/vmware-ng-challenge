@@ -11,16 +11,10 @@ import { IFaasStatus } from './FaasStatus'
 
 export class FaasStatusComponent implements OnInit {
 
-   @Input('id')
-   id: string;
+   @Input()
+   status: IFaasStatus;
 
-   faasStatus: IFaasStatus;
+   constructor() { }
 
-   constructor(
-      private faasStatusService: FassStatusService
-   ) { }
-
-   ngOnInit() {
-      this.faasStatusService.getFaasStatus(this.id).subscribe(faasStatus => this.faasStatus = faasStatus);
-   }
+   ngOnInit() { }
 }
