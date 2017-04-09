@@ -1,4 +1,4 @@
-<td>{{cost.faasInfo.id}}</td>
-<td>{{cost.faasInfo.name}}</td>
-<td>{{cost.faasInfo.description}}</td>
-<td>USD</td>
+<td>{{costInfo.faasInfo.id}}</td>
+<td>{{costInfo.faasInfo.name}}</td>
+<td>{{costInfo.faasInfo.description}}</td>
+<td>{{costInfo.totalMonthlyCost | currency : (currency$ | async)}}</td>

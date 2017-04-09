@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FaasCostService } from './faasCost.service';
+import { Observable } from 'rxjs'
+import { ExchangeRatesService } from './exchangeRates.service';
 import { IFaasCost } from './FaasCost'
 
 @Component({
@@ -11,9 +12,15 @@ import { IFaasCost } from './FaasCost'
 export class FaasCostComponent implements OnInit {
 
    @Input()
-   cost: IFaasCost;
+   costInfo: IFaasCost;
 
-   constructor() { }
+   currency$: Observable<string>;
 
-   ngOnInit() { }
+   constructor(
+      private exchangeRatesService: ExchangeRatesService
+   ) { }
+
+   ngOnInit() {
+      this.currency$ = this.exchangeRatesService.selectedCurrency$;
+   }
 }

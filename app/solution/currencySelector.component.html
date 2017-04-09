@@ -1,0 +1,14 @@
+<form>
+   <section class="form-block">
+      <div class="form-group">
+         <label for="currencySelect">Currency</label>
+         <div class="select">
+            <select name="currencySelect"
+                    [ngModel]="selCurrency$ | async"
+                    (ngModelChange)="selectCurrency($event)">
+               <option *ngFor="let currency of currencyList" [value]="currency">{{currency}}</option>
+            </select>
+         </div>
+      </div>
+   </section>
+</form>

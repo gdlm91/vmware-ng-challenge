@@ -1,5 +1,7 @@
 <h1>FaaS Monthly Costs to date</h1>
 
+<currency-selector></currency-selector>
+
 <table class="table">
    <thead>
       <tr>
@@ -9,10 +11,10 @@
          <th>Cost</th>
       </tr>
    </thead>
-   <tbody>
+   <tbody *ngIf="exgRates$ | async">
       <tr *ngFor="let faasCost$ of faasCostLists"
           faas-cost
-          [cost]='faasCost$ | async'>
+          [costInfo]='faasCost$ | async'>
       </tr>
    </tbody>
 </table>
