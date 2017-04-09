@@ -20,6 +20,6 @@ export class FaasCostComponent implements OnInit {
    ) { }
 
    ngOnInit() {
-      this.fassCostService.getFaasCost(this.id).subscribe(faasCost => this.faasCost = faasCost);
+      this.fassCostService.getFaasCost(this.id, 'EUR').subscribe(faasCost => this.faasCost = faasCost);
    }
 }

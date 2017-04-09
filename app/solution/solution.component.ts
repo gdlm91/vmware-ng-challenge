@@ -10,11 +10,11 @@ import { FassCostService } from './faasCost.service';
 export class SolutionComponent implements OnInit {
    faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
+   faasCosts$ = [];
+
    constructor(
       private faasCostService: FassCostService
    ) { }
 
-   ngOnInit() {
-
-   }
+   ngOnInit() { }
 }
