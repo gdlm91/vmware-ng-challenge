@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FassCostService } from './faasCost.service';
+import { FaasCostService } from './faasCost.service';
 import { IFaasCost } from './FaasCost'
 
 @Component({
@@ -10,16 +10,10 @@ import { IFaasCost } from './FaasCost'
 
 export class FaasCostComponent implements OnInit {
 
-   @Input('id')
-   id: string;
+   @Input()
+   cost: IFaasCost;
 
-   faasCost: IFaasCost;
+   constructor() { }
 
-   constructor(
-      private fassCostService: FassCostService
-   ) { }
-
-   ngOnInit() {
-      this.fassCostService.getFaasCost(this.id, 'EUR').subscribe(faasCost => this.faasCost = faasCost);
-   }
+   ngOnInit() { }
 }

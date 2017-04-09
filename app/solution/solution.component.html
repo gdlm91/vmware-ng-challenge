@@ -10,9 +10,9 @@
       </tr>
    </thead>
    <tbody>
-      <tr *ngFor="let id of faasIds"
+      <tr *ngFor="let faasCost$ of faasCostLists"
           faas-cost
-          [id]='id'>
+          [cost]='faasCost$ | async'>
       </tr>
    </tbody>
 </table>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { FassCostService } from './faasCost.service';
+import { FaasCostService } from './faasCost.service';
+import { IFaasCost } from './FaasCost';
 
 @Component({
    moduleId: __moduleName,
@@ -8,13 +9,15 @@ import { FassCostService } from './faasCost.service';
    templateUrl: 'solution.component.html'
 })
 export class SolutionComponent implements OnInit {
-   faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   private faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
-   faasCosts$ = [];
+   faasCostLists: Observable<IFaasCost>[] = [];
 
    constructor(
-      private faasCostService: FassCostService
+      private faasCostService: FaasCostService
    ) { }
 
-   ngOnInit() { }
+   ngOnInit() {
+      this.faasIds.forEach(id => this.faasCostLists.push(this.faasCostService.getFaasCost(id)));
+   }
 }

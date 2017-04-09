@@ -19,9 +19,4 @@ export interface IFaasCost {
     * Total Monthly Cost
     */
    totalMonthlyCost: number;
-
-   /**
-    * Currency Symbol
-    */
-   currencySymbol: string
 }
