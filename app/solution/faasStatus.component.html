@@ -1,0 +1,9 @@
+<td>{{statusInfo.faasInfo.id}}</td>
+<td>{{statusInfo.faasInfo.name}}</td>
+<td>{{statusInfo.faasInfo.description}}</td>
+<td>{{statusInfo.faasUsage.state}}</td>
+<td [class.yellow]="statusInfo.memoryAllocationThreshold == '>10'"
+    [class.red]="statusInfo.memoryAllocationThreshold == '>20'">
+   {{statusInfo.totalMemoryAllocation | vmwMemoryFormat}}
+</td>
+<td>{{statusInfo.totalMonthlyCost | currency : 'USD'}}</td>
