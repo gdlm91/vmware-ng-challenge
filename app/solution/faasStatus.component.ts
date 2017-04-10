@@ -3,7 +3,7 @@ import { IFaasStatus } from './FaasStatus'
 
 @Component({
    moduleId: __moduleName,
-   selector: '[faas-status]',
+   selector: 'faas-status',
    templateUrl: 'faasStatus.component.html',
    styleUrls: ['faasStatus.component.css']
 })
@@ -11,7 +11,7 @@ import { IFaasStatus } from './FaasStatus'
 export class FaasStatusComponent implements OnInit {
 
    @Input()
-   statusInfo: IFaasStatus;
+   faasStatusLists: IFaasStatus[];
 
    constructor() { }
 

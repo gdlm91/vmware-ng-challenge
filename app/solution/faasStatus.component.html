@@ -1,9 +1,25 @@
-<td>{{statusInfo.faasInfo.id}}</td>
-<td>{{statusInfo.faasInfo.name}}</td>
-<td>{{statusInfo.faasInfo.description}}</td>
-<td>{{statusInfo.faasUsage.state}}</td>
-<td [class.yellow]="statusInfo.memoryAllocationThreshold == '>10'"
-    [class.red]="statusInfo.memoryAllocationThreshold == '>20'">
-   {{statusInfo.totalMemoryAllocation | vmwMemoryFormat}}
-</td>
-<td>{{statusInfo.totalMonthlyCost | currency : 'USD'}}</td>
+<table class="table">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Description</th>
+         <th>State</th>
+         <th>Memory Allocation</th>
+         <th>Monthly Cost</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let faasStatus of faasStatusLists">
+         <td>{{faasStatus.faasInfo.id}}</td>
+         <td>{{faasStatus.faasInfo.name}}</td>
+         <td>{{faasStatus.faasInfo.description}}</td>
+         <td>{{faasStatus.faasUsage.state}}</td>
+         <td [class.yellow]="faasStatus.memoryAllocationThreshold == '>10'"
+             [class.red]="faasStatus.memoryAllocationThreshold == '>20'">
+            {{faasStatus.totalMemoryAllocation | vmwMemoryFormat}}
+         </td>
+         <td>{{faasStatus.totalMonthlyCost | currency : 'USD'}}</td>
+      </tr>
+   </tbody>
+</table>

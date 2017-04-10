@@ -11,13 +11,13 @@ import { IFaasStatus } from './FaasStatus';
 export class SolutionComponent implements OnInit {
    private faasIds = ['1', '2', '3', '4'];
 
-   faasStatusLists: Observable<IFaasStatus>[] = [];
+   newFaasStatusList: Observable<IFaasStatus[]>;
 
    constructor(
       private faasStatusService: FaasStatusService
    ) { }
 
    ngOnInit() {
-      this.faasIds.forEach(id => this.faasStatusLists.push(this.faasStatusService.getFaasStatus(id)));
+      this.newFaasStatusList = this.faasStatusService.getListFaasStatus(this.faasIds);
    }
 }
