@@ -9,15 +9,16 @@ import { IFaasStatus } from './FaasStatus';
    templateUrl: 'solution.component.html'
 })
 export class SolutionComponent implements OnInit {
+
    private faasIds = ['1', '2', '3', '4'];
 
-   newFaasStatusList: Observable<IFaasStatus[]>;
+   faasStatusList: Observable<IFaasStatus[]>;
 
    constructor(
       private faasStatusService: FaasStatusService
    ) { }
 
    ngOnInit() {
-      this.newFaasStatusList = this.faasStatusService.getListFaasStatus(this.faasIds);
+      this.faasStatusList = this.faasStatusService.getListFaasStatus(this.faasIds);
    }
 }
