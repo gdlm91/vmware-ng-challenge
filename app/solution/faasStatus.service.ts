@@ -11,12 +11,18 @@ export class FassStatusService extends FaasPlatformService {
       super()
    }
 
-   getFaasStatus(id: string): Observable<IFaasStatus> {
-      return this.getFaasInfo$(id)
-         .concatMapTo(this.getFaasUsage$(id), (faasInfo, faasUsage) => this.getStatusInfo(faasInfo, faasUsage));
+   getListFaasStatus(ids: string[]): Observable<IFaasStatus[]> {
+      let faasObsList: Observable<IFaasStatus>[] = ids.map(id => this.getFaasStatus(id).do(console.log));
+
+      return Observable.combineLatest(faasObsList);
    }
 
-   private getStatusInfo(faasInfo, faasUsage): IFaasStatus {
+   getFaasStatus(id: string) {
+      return Observable.combineLatest(this.getFaasInfo$(id), this.getFaasUsage$(id))
+         .map(faasInfoAndUsage => this.getStatusInfo(faasInfoAndUsage));
+   }
+
+   private getStatusInfo([faasInfo, faasUsage]): IFaasStatus {
       let totalMemoryAllocation = faasUsage.instances * faasInfo.memoryAllocation;
       let memoryAllocationThreshold = this.getMemoryAllocationThreshold(totalMemoryAllocation);
 
