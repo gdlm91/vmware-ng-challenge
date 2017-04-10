@@ -9,19 +9,48 @@ import { IFaasUsage } from '../api/FaasUsage'
 
 @Injectable()
 export class FaasStatusService extends FaasPlatformService {
+   private faasIds = ['1', '2', '3', '4'];
+   private faasDisabledQty: number = 0;
 
    constructor() {
       super();
    }
 
-   getListFaasStatus(ids: string[]): Observable<IFaasStatus[]> {
-      let faasObsList: Observable<IFaasStatus>[] = ids.map(id => this.getFaasStatus(id).do(console.log));
+   getListFaasStatusEnabled(): Observable<IFaasStatus[]> {
+      return this.getListFaasStatus()
+         .map((faasObsList: IFaasStatus[]) => faasObsList.filter(faas => faas.faasUsage.enabled))
+   }
+
+   getListFaasStatusDisabled(): Observable<IFaasStatus[]> {
+      return this.getListFaasStatus()
+         .map((faasObsList: IFaasStatus[]) => faasObsList.filter(faas => !faas.faasUsage.enabled))
+   }
+
+   toggleFaasStatus(faas: IFaasStatus) {
+      let newStatus = !faas.faasUsage.enabled;
+
+      if (!newStatus) {
+         this.faasDisabledQty++
+      } else {
+         this.faasDisabledQty--
+      };
+
+      if (this.faasDisabledQty === this.faasIds.length) {
+         this.faasDisabledQty--;
+      } else {
+         this.enableFaas(faas.faasInfo.id, newStatus).subscribe();
+      }
+
+   }
+
+   private getListFaasStatus(): Observable<IFaasStatus[]> {
+      let faasObsList: Observable<IFaasStatus>[] = this.faasIds.map(id => this.getFaasStatus(id));
 
       return Observable.combineLatest(faasObsList)
          .map(faasObsList => faasObsList.sort((a, b) => b.totalMonthlyCost - a.totalMonthlyCost));
    }
 
-   getFaasStatus(id: string) {
+   private getFaasStatus(id: string) {
       return Observable.combineLatest(this.getFaasInfo$(id), this.getFaasUsage$(id))
          .map(faasInfoAndUsage => this.getFaasInfo(faasInfoAndUsage));
    }

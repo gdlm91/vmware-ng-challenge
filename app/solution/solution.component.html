@@ -1,3 +1,9 @@
 <h1>FaaS A/B Status Info (functions 1 to 4)</h1>
 
-<faas-status [faasStatusLists]="faasStatusList | async"></faas-status>
+<h2>Enabled Faas</h2>
+<faas-status [faasStatusLists]="faasStatusListEnabled | async"
+             (toggleClick)="toggleFaasStatus($event)"></faas-status>
+
+<h2>Disabled Faas</h2>
+<faas-status [faasStatusLists]="faasStatusListDisabled | async"
+             (toggleClick)="toggleFaasStatus($event)"></faas-status>

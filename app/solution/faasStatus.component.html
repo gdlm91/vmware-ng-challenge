@@ -22,12 +22,14 @@
          </td>
          <td>{{faasStatus.totalMonthlyCost | currency : 'USD'}}</td>
          <td *ngIf="faasStatus.faasUsage.enabled; else disabled">
-            <a href="#"
+            <a href
+               (click)="toggleStatus($event, faasStatus)"
                class="label label-success clickable">Enabled</a>
          </td>
          <ng-template #disabled>
             <td>
-               <a href="#"
+               <a href
+                  (click)="toggleStatus($event, faasStatus)"
                   class="label label-danger clickable">Disabled</a>
             </td>
          </ng-template>

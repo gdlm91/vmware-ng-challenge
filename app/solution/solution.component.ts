@@ -9,16 +9,21 @@ import { IFaasStatus } from './FaasStatus';
    templateUrl: 'solution.component.html'
 })
 export class SolutionComponent implements OnInit {
+   faasStatusListEnabled: Observable<IFaasStatus[]>;
 
-   private faasIds = ['1', '2', '3', '4'];
-
-   faasStatusList: Observable<IFaasStatus[]>;
+   faasStatusListDisabled: Observable<IFaasStatus[]>;
 
    constructor(
       private faasStatusService: FaasStatusService
    ) { }
 
    ngOnInit() {
-      this.faasStatusList = this.faasStatusService.getListFaasStatus(this.faasIds);
+      this.faasStatusListEnabled = this.faasStatusService.getListFaasStatusEnabled();
+
+      this.faasStatusListDisabled = this.faasStatusService.getListFaasStatusDisabled();
+   }
+
+   toggleFaasStatus(faas: IFaasStatus) {
+      this.faasStatusService.toggleFaasStatus(faas);
    }
 }
