@@ -12,13 +12,13 @@ export class SolutionComponent implements OnInit {
 
    private faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
-   faasStatusList: Observable<IFaasStatus[]>;
+   faasStatusList$: Observable<IFaasStatus[]>;
 
    constructor(
       private faasStatusService: FassStatusService
    ) { }
 
    ngOnInit() {
-      this.faasStatusList = this.faasStatusService.getListFaasStatus(this.faasIds);
+      this.faasStatusList$ = this.faasStatusService.getListFaasStatus(this.faasIds);
    }
 }

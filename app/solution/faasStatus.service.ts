@@ -12,7 +12,7 @@ export class FassStatusService extends FaasPlatformService {
    }
 
    getListFaasStatus(ids: string[]): Observable<IFaasStatus[]> {
-      let faasObsList: Observable<IFaasStatus>[] = ids.map(id => this.getFaasStatus(id).do(console.log));
+      let faasObsList: Observable<IFaasStatus>[] = ids.map(id => this.getFaasStatus(id));
 
       return Observable.combineLatest(faasObsList);
    }
