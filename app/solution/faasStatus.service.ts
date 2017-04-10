@@ -17,7 +17,8 @@ export class FaasStatusService extends FaasPlatformService {
    getListFaasStatus(ids: string[]): Observable<IFaasStatus[]> {
       let faasObsList: Observable<IFaasStatus>[] = ids.map(id => this.getFaasStatus(id).do(console.log));
 
-      return Observable.combineLatest(faasObsList);
+      return Observable.combineLatest(faasObsList)
+         .map(faasObsList => faasObsList.sort((a, b) => b.totalMonthlyCost - a.totalMonthlyCost));
    }
 
    getFaasStatus(id: string) {
