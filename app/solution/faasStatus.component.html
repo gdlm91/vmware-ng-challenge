@@ -7,6 +7,7 @@
          <th>State</th>
          <th>Memory Allocation</th>
          <th>Monthly Cost</th>
+         <th>Status</th>
       </tr>
    </thead>
    <tbody>
@@ -20,6 +21,16 @@
             {{faasStatus.totalMemoryAllocation | vmwMemoryFormat}}
          </td>
          <td>{{faasStatus.totalMonthlyCost | currency : 'USD'}}</td>
+         <td *ngIf="faasStatus.faasUsage.enabled; else disabled">
+            <a href="#"
+               class="label label-success clickable">Enabled</a>
+         </td>
+         <ng-template #disabled>
+            <td>
+               <a href="#"
+                  class="label label-danger clickable">Disabled</a>
+            </td>
+         </ng-template>
       </tr>
    </tbody>
 </table>
