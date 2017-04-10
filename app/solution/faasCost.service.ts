@@ -18,13 +18,19 @@ export class FaasCostService extends FaasPlatformService {
       super();
    }
 
-   getFaasCost(id: string): Observable<IFaasCost> {
-      return this.getFaasInfo$(id)
-         .concatMapTo(this.getFaasUsage$(id), (faasInfo, faasUsage) => this.getCostInfo(faasInfo, faasUsage))
-         .switchMap(costInfo => this.exchangeRatesService.applyCurrencyExchange(costInfo));
+   getListFaasCost(ids: string[]): Observable<IFaasCost[]> {
+      let faasObsList: Observable<IFaasCost>[] = ids.map(id => this.getFaasCost(id));
+
+      return Observable.combineLatest(faasObsList);
    }
 
-   private getCostInfo(faasInfo: IFaasInfo, faasUsage: IFaasUsage): IFaasCost {
+   getFaasCost(id: string) {
+      return Observable.combineLatest(this.getFaasInfo$(id), this.getFaasUsage$(id))
+         .map(faasInfoAndUsage => this.getCostInfo(faasInfoAndUsage))
+         .switchMap(costInfo => this.exchangeRatesService.applyCurrencyExchange(costInfo));;
+   }
+
+   private getCostInfo([faasInfo, faasUsage]): IFaasCost {
       let totalMonthlyCost = this.getTotalMonthlyCost(faasInfo, faasUsage);
 
       let cost: IFaasCost = {

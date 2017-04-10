@@ -5,14 +5,14 @@ import { IFaasCost } from './FaasCost'
 
 @Component({
    moduleId: __moduleName,
-   selector: '[faas-cost]',
+   selector: 'faas-cost',
    templateUrl: 'faasCost.component.html'
 })
 
 export class FaasCostComponent implements OnInit {
 
    @Input()
-   costInfo: IFaasCost;
+   faasCostList: IFaasCost[];
 
    currency$: Observable<string>;
 

@@ -2,19 +2,5 @@
 
 <currency-selector></currency-selector>
 
-<table class="table">
-   <thead>
-      <tr>
-         <th>ID</th>
-         <th>Name</th>
-         <th>Description</th>
-         <th>Cost</th>
-      </tr>
-   </thead>
-   <tbody *ngIf="exgRates$ | async">
-      <tr *ngFor="let faasCost$ of faasCostLists"
-          faas-cost
-          [costInfo]='faasCost$ | async'>
-      </tr>
-   </tbody>
-</table>
+<faas-cost *ngIf="exgRates$ | async"
+           [faasCostList]="faasCostLists$ | async"></faas-cost>

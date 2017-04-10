@@ -1,4 +1,18 @@
-<td>{{costInfo.faasInfo.id}}</td>
-<td>{{costInfo.faasInfo.name}}</td>
-<td>{{costInfo.faasInfo.description}}</td>
-<td>{{costInfo.totalMonthlyCost | currency : (currency$ | async)}}</td>
+<table class="table">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Description</th>
+         <th>Cost</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let faasCost of faasCostList">
+         <td>{{faasCost.faasInfo.id}}</td>
+         <td>{{faasCost.faasInfo.name}}</td>
+         <td>{{faasCost.faasInfo.description}}</td>
+         <td>{{faasCost.totalMonthlyCost | currency : (currency$ | async)}}</td>
+      </tr>
+   </tbody>
+</table>

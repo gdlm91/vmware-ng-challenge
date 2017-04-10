@@ -12,7 +12,7 @@ import { IFaasCost } from './FaasCost';
 export class SolutionComponent implements OnInit {
    private faasIds = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
-   faasCostLists: Observable<IFaasCost>[] = [];
+   faasCostLists$: Observable<IFaasCost[]>;
    exgRates$: Observable<any>;
 
    constructor(
@@ -23,6 +23,6 @@ export class SolutionComponent implements OnInit {
    ngOnInit() {
       this.exgRates$ = this.exchangeRatesService.getExchangeRates();
 
-      this.faasIds.forEach(id => this.faasCostLists.push(this.faasCostService.getFaasCost(id)));
+      this.faasCostLists$ = this.faasCostService.getListFaasCost(this.faasIds);
    }
 }
